@@ -48,7 +48,7 @@ Route::post('/', function () {
         return view('home');
     }
 
-    if (session('user')['profil']['email'] == "" && session('user')['profil']['password']) {
+    if ($_POST["email"] == "" && $_POST['password'] == "") {
         return view('/login', ['error' => 'Register Terlebih Dahulu!']); 
     }
 
