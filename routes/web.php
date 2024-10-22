@@ -2,6 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
+$user = [
+    'profil' => [
+        'username' => '',
+        'name' => '',
+        'paswrod' => '',
+        'phone' => '',
+        'address' => '',
+        'email' => '',
+    ]];
+
+session(['user' => $user]);
 
 Route::get('/reservation', function () {
     return view('reservation');
@@ -28,15 +39,41 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('/', function () {
-    return view('login');
+    return view('login', ['error' => null]);
 })->name('login');
 
-Route::get('/login', function () {
-    return view('login');
+Route::post('/', function () {
+    if ($_POST['email'] == session('user')['profil']['email'] && 
+        $_POST['password'] == session('user')['profil']['password']) {
+        return view('home');
+    }
+
+    if (session('user')['profil']['email'] == "" && session('user')['profil']['password']) {
+        return view('/login', ['error' => 'Register Terlebih Dahulu!']); 
+    }
+
+    return view('/login', ['error' => 'Email / Username / Password Salah!']);
 });
 
 Route::get('/register', function () {
     return view('register');
+});
+
+Route::post('/register', function () {
+    $userData = [
+        'profil' => [
+            'username' => $_POST['username'],
+            'name' => $_POST['name'],
+            'password' => $_POST['password'],
+            'phone' => $_POST['phone'],
+            'email' => $_POST['email'],
+            'address' => $_POST['address']
+        ]
+    ];
+    
+    session(['user' => $userData]);
+
+    return redirect('/');
 });
 
 Route::get('/forgotpassword', function () {
@@ -72,3 +109,37 @@ Route::get('/obat/{id}', function (string $id) {
         return redirect()->back()->with('error', 'Produk tidak ditemukan');
     }
 })->name('detailObat');
+
+Route::post('/edit-profil', function () {
+    $userData = [
+        'profil' => [
+            'username' => session('user')['profil']['username'],
+            'name' => $_POST['name'],
+            'password' => session('user')['profil']['password'],
+            'phone' => $_POST['phone'],
+            'email' => $_POST['email'],
+            'address' => $_POST['address']
+        ]
+    ];
+    
+    session(['user' => $userData]);
+
+    return redirect('/profil');
+});
+
+Route::post('/logout', function () {
+    $userData = [
+        'profil' => [
+            'username' => '',
+            'name' => '',
+            'password' => '',
+            'phone' => '',
+            'email' => '',
+            'address' => ''
+        ]
+    ];
+    
+    session(['user' => $userData]);
+
+    return redirect('/');
+});
