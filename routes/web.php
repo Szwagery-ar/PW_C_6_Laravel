@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 
-
-
 Route::get('/reservation', function () {
     return view('reservation');
 })->name('reservation'); 
@@ -25,10 +23,25 @@ Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 })->name('home');
 
+Route::get('/', function () {
+    return view('login');
+})->name('login');
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/register', function () {
+    return view('register');
+});
+
+Route::get('/forgotpassword', function () {
+    return view('forgotpassword');
+});
 
 Route::get('/about', function () {
     return view('bout');
