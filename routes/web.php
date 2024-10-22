@@ -7,7 +7,7 @@ $user = [
     'profil' => [
         'username' => '',
         'name' => '',
-        'paswrod' => '',
+        'password' => '',
         'phone' => '',
         'address' => '',
         'email' => '',
@@ -57,6 +57,10 @@ Route::post('/', function () {
 
     if ($_POST["email"] == "" && $_POST['password'] == "") {
         return view('/login', ['error' => 'Register Terlebih Dahulu!']); 
+    }
+
+    if ($_POST["email"] == "admin@admin.com" && $_POST['password'] == "1234") {
+        return view('admin.dashboard'); 
     }
 
     return view('/login', ['error' => 'Email / Username / Password Salah!']);

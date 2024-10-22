@@ -205,7 +205,7 @@
         <div class="d-flex justify-content-center align-items-center p-1"
             style="background-color: #9CAD8A; padding: 10px 20px; height: 70px;">
             <div class="logo-placeholder"></div>
-            <img class="p--5" src="{{asset('images/Logo.png')}}" alt="Logo Apotek" style="width: 70%">
+            <img class="p--5" src="{{ asset('images/Logo.png') }}" alt="Logo Apotek" style="width: 70%">
         </div>
 
         <ul class="nav flex-column">
@@ -249,7 +249,7 @@
             </ul>
             <ul class="nav flex-column mt-auto">
                 <li class="nav-item">
-                    <a href="<-- url balik ke login -->" class="nav-link">
+                    <a href="/" class="nav-link">
                         <i class="fa fa-sign-out-alt"></i> Logout
                     </a>
                 </li>
