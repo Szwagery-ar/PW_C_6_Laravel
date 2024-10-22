@@ -50,13 +50,13 @@ Route::get('/', function () {
 })->name('login');
 
 Route::post('/', function () {
+    if ($_POST["email"] == "" && $_POST['password'] == "") {
+        return view('/login', ['error' => 'Register Terlebih Dahulu!']); 
+    }
+
     if ($_POST['email'] == session('user')['profil']['email'] && 
         $_POST['password'] == session('user')['profil']['password']) {
         return view('home');
-    }
-
-    if ($_POST["email"] == "" && $_POST['password'] == "") {
-        return view('/login', ['error' => 'Register Terlebih Dahulu!']); 
     }
 
     if ($_POST["email"] == "admin@admin.com" && $_POST['password'] == "1234") {
