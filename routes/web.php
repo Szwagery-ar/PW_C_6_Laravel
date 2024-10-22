@@ -2,6 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+$user = [
+    'profil' => [
+        'username' => '',
+        'name' => '',
+        'paswrod' => '',
+        'phone' => '',
+        'address' => '',
+        'email' => '',
+    ]];
+
+session(['user' => $user]);
+
+
 Route::get('/reservation', function () {
     return view('reservation');
 })->name('reservation'); 
@@ -14,6 +28,10 @@ Route::get('/obat', function () {
     return view('obat');
 })->name('obat');
 
+Route::get('/jenisObat', function () {
+    return view('jenisObat');
+})->name('jenisObat');
+
 Route::get('/detailObat', function () {
     return view('detailObat');
 })->name('detailObat');
@@ -22,9 +40,52 @@ Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 })->name('home');
+
+
+Route::get('/', function () {
+    return view('login', ['error' => null]);
+})->name('login');
+
+Route::post('/', function () {
+    if ($_POST['email'] == session('user')['profil']['email'] && 
+        $_POST['password'] == session('user')['profil']['password']) {
+        return view('home');
+    }
+
+    if ($_POST["email"] == "" && $_POST['password'] == "") {
+        return view('/login', ['error' => 'Register Terlebih Dahulu!']); 
+    }
+
+    return view('/login', ['error' => 'Email / Username / Password Salah!']);
+});
+
+Route::get('/register', function () {
+    return view('register');
+});
+
+Route::post('/register', function () {
+    $userData = [
+        'profil' => [
+            'username' => $_POST['username'],
+            'name' => $_POST['name'],
+            'password' => $_POST['password'],
+            'phone' => $_POST['phone'],
+            'email' => $_POST['email'],
+            'address' => $_POST['address']
+        ]
+    ];
+    
+    session(['user' => $userData]);
+
+    return redirect('/');
+});
+
+Route::get('/forgotpassword', function () {
+    return view('forgotpassword');
+});
 
 Route::get('/about', function () {
     return view('about');
@@ -72,3 +133,36 @@ Route::get('/pembayaranKonsul',function(){
     return view('/pembayaranKonsul');
 })->name('pembayaranKonsul');
 
+Route::post('/edit-profil', function () {
+    $userData = [
+        'profil' => [
+            'username' => session('user')['profil']['username'],
+            'name' => $_POST['name'],
+            'password' => session('user')['profil']['password'],
+            'phone' => $_POST['phone'],
+            'email' => $_POST['email'],
+            'address' => $_POST['address']
+        ]
+    ];
+    
+    session(['user' => $userData]);
+
+    return redirect('/profil');
+});
+
+Route::post('/logout', function () {
+    $userData = [
+        'profil' => [
+            'username' => '',
+            'name' => '',
+            'password' => '',
+            'phone' => '',
+            'email' => '',
+            'address' => ''
+        ]
+    ];
+    
+    session(['user' => $userData]);
+
+    return redirect('/');
+});

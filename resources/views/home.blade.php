@@ -144,7 +144,7 @@
                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                     <div class="row justify-content-center">
                         @foreach ($imageChunk as $i => $image)
-                            <div class="col-3 d-flex justify-content-center">
+                            <a href="{{ route('jenisObat') }}" class="col-3 d-flex justify-content-center">
                                 <div class="card mb-5">
                                     <img src="{{ asset('images/' . $image) }}" class="d-block w-100"
                                         alt="Image {{ $i + 1 }}">
@@ -154,7 +154,7 @@
                                         <p class="card-text"></p>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>
