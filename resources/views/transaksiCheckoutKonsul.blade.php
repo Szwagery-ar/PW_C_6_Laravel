@@ -27,70 +27,63 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body mx-5">
-                            <h2 class="card-title mb-4" style="color:#768A6E;">Keranjang:</h2>
+                            <h2 class="card-title mb-4" style="color:#768A6E;">Booking</h2>
                             
                             <!-- Item 1 -->
                             <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
-                                <div class="d-flex align-items-center">
-                                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-                                    <img src="{{asset('images/apotek_online_k24klik_20200810090629359225_SANMOL-4-TAB 1.png')}}" alt="Sanmol Tablet" style="width: 50px; height: auto; margin-right: 10px;">
-                                    <div>
-                                        <h6 class="mb-0"style="color:#304D30;">SANMOL TABLET 500 MG</h6>
-                                        <small class="text-muted"style="color:#304D30;">Rp 5.000</small>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h6 class="mb-0"style="color:#304D30;">Rp 5.000</h6>
-                                    <div style="width: 120px;">
-                                        <div class="input-group mb-4">
-                                            <button class="btn btn-outline-secondary" type="button">-</button>
-                                            <input type="text" class="form-control text-center" placeholder="" aria-label="Example text with two button addons" value="2">
-                                            <button class="btn btn-outline-secondary" type="button">+</button>
-                                        </div>
-                                    </div>
+                                <h6 class="mb-0 pr-4"style="color:#304D30;" style="width: 200px;">Nama Lengkap</h6>
+                                <div class="card border border-dark rounded m-2 p-2" style="width: 1000px;">
+                                    <h6 class="mx-2 mb-0"style="color:#304D30;">Temp</h6>
                                 </div>
                             </div>
                             <!-- Item 2 -->
                             <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
-                                <div class="d-flex align-items-center">
-                                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-                                    <img src="{{asset('images/images21.jpg')}}" alt="Mylanta" style="width: 50px; height: auto; margin-right: 10px;">
-                                    <div>
-                                        <h6 class="mb-0"style="color:#304D30;">MYLANTA 500 ML</h6>
-                                        <small class="text-muted"style="color:#304D30;">Rp 66.000</small>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h6 class="mb-0"style="color:#304D30;">Rp 132.000</h6>
-                                    <div style="width: 120px;">
-                                        <div class="input-group mb-3">
-                                            <button class="btn btn-outline-secondary" type="button">-</button>
-                                            <input type="text" class="form-control text-center" placeholder="" aria-label="Example text with two button addons" value="2">
-                                            <button class="btn btn-outline-secondary" type="button">+</button>
-                                        </div>
-                                    </div>
+                                <h6 class="mb-0 pr-4"style="color:#304D30;"style="width: 200px;">Usia</h6>
+                                <div class="card border border-dark rounded m-2 p-2" style="width: 1000px;">
+                                    <h6 class="mx-2 mb-0"style="color:#304D30;">Temp</h6>
                                 </div>
                             </div>
                             <!-- Item 3 -->
-                            <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
-                                <div class="d-flex align-items-center">
-                                   <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-                                    <img src="{{asset('images/image17.png')}}" alt="Sumagstic Tablet" style="width: 50px; height: auto; margin-right: 10px;">
-                                    <div>
-                                        <h6 class="mb-0"style="color:#304D30;">SUMAGSTIC TABLET 800 MG</h6>
-                                        <small class="text-muted"style="color:#304D30;">Rp 18.000</small>
+                            <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                                    <h6 class="mb-0 pr-4"style="color:#304D30;"style="width: 200px;">Jenis Kelamin</h6>
+                                    <div class="card border border-dark rounded m-2 p-2" style="width: 1000px;">
+                                        <h6 class="mx-2 mb-0"style="color:#304D30;">Temp</h6>
                                     </div>
-                                </div>
-                                <div>
-                                    <h6 class="mb-0"style="color:#304D30;">Rp 18.000</h6>
-                                    <div style="width: 120px;">
-                                        <div class="input-group mb-3">
-                                            <button class="btn btn-outline-secondary" type="button">-</button>
-                                            <input type="text" class="form-control text-center" placeholder="" aria-label="Example text with two button addons" value="1">
-                                            <button class="btn btn-outline-secondary" type="button">+</button>
-                                        </div>
+                            </div>
+                            <!-- Item 14-->
+                            <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                                    <h6 class="mb-0 pr-4"style="color:#304D30;"style="width: 200px;">Berat Badan</h6>
+                                    <div class="card border border-dark rounded m-2 p-2" style="width: 1000px;">
+                                        <h6 class="mx-2 mb-0"style="color:#304D30;">Temp</h6>
                                     </div>
+                            </div>
+                            <!-- Item 5 -->
+                            <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                                    <h6 class="mb-0 pr-4"style="color:#304D30;"style="width: 200px;">Jam Konsultasi</h6>
+                                    <div class="card border border-dark rounded m-2 p-2" style="width: 1000px;">
+                                        <h6 class="mx-2 mb-0"style="color:#304D30;">Temp</h6>
+                                    </div>
+                            </div>
+                            <!-- Item 6 -->
+                            <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                                <h6 class="mb-0 pr-4"style="color:#304D30;"style="width: 200px;">Tanggal Konsultasi</h6>
+                                <div class="card border border-dark rounded m-2 p-2" style="width: 1000px;">
+                                    <h6 class="mx-2 mb-0"style="color:#304D30;">Temp</h6>
                                 </div>
+                            </div>
+                            <!-- Item 7 -->
+                            <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                                <h6 class="mb-0 pr-4"style="color:#304D30;"style="width: 200px;">Alergi</h6>
+                                <div class="card border border-dark rounded m-2 p-2" style="width: 1000px;">
+                                    <h6 class="mx-2 mb-0"style="color:#304D30;">Temp</h6>
+                                </div>
+                            </div>
+                            <!-- Item 8 -->
+                            <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                                    <h6 class="mb-0 pr-4"style="color:#304D30;"style="width: 200px;">Keluhan</h6>
+                                    <div class="card border border-dark rounded m-2 p-2" style="width: 1000px;">
+                                        <h6 class="mx-2 mb-0"style="color:#304D30;">Temp</h6>
+                                    </div>
                             </div>
                     </div>
                 </div>
