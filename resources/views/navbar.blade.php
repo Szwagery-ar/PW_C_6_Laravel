@@ -66,7 +66,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="row mx-2" style="flex-grow: 1">
             <div class="col-3">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="/home">
                     <img src="{{ asset('images/Logo.png') }}" alt="Atma" width="135" height="50">
                 </a>
             </div>

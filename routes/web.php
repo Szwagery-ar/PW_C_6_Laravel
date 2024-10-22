@@ -26,6 +26,10 @@ Route::get('/obat', function () {
     return view('obat');
 })->name('obat');
 
+Route::get('/jenisObat', function () {
+    return view('jenisObat');
+})->name('jenisObat');
+
 Route::get('/detailObat', function () {
     return view('detailObat');
 })->name('detailObat');
