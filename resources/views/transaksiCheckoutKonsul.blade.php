@@ -17,12 +17,12 @@
             flex-direction: column; /* Membuat konten di dalamnya berorientasi vertikal */
         }
         .my-12-1{
-            margin-top: 12rem;
+            margin-top: 3rem;
             margin-bottom: 1rem;
         }
     </style>
     <div class="m-0 px-10" style="background-color: #F4F1E3;">
-        <div class="container py-5 ">
+        <div class="container py-3 pt-5">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -92,14 +92,62 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Checkout Button -->
-                            <div class="d-flex justify-content-end my-12-1">
-                                <a type="button" class="btn text-white" style="background-color: #768A6E;" href="{{url('/transaksiCheckout')}}">CHECK OUT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container py-3 pt-1">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body mx-5">
+                        <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                            <div class="align-items-center mb-4 mt-4">
+                                <h6 class="mb-0"style="color:#304D30;">METODE PEMBAYARAN</h6>
+                                <h6 class="mt-3 mb-0"style="color:#304D30;">e-wallet</h6>
+                                <div class="d-flex align-items-center">
+                                    <input class="form-check-input mt-0 mx-1" name="bayarwoi" type="radio" value="" aria-label="Checkbox for following text input">
+                                    <!-- <img src="{{asset('images/images21.jpg')}}" alt="gopay" style="width: 50px; height: auto; margin-right: 10px;"> -->
+                                    <h6 class="mb-0"style="color:#304D30;">Gopay</h6>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input class="form-check-input mt-0 mx-1" name="bayarwoi"type="radio" value="" aria-label="Checkbox for following text input">
+                                    <!-- <img src="{{asset('images/images21.jpg')}}" alt="gopay" style="width: 50px; height: auto; margin-right: 10px;"> -->
+                                    <h6 class="mb-0"style="color:#304D30;">Ovo</h6>
+                                </div>  
+                                <h6 class="mt-3 mb-0"style="color:#304D30;">virtual account</h6>
+                                <div class="d-flex align-items-center">
+                                    <input class="form-check-input mt-0 mx-1" name="bayarwoi" type="radio" value="" aria-label="Checkbox for following text input">
+                                    <!-- <img src="{{asset('images/images21.jpg')}}" alt="gopay" style="width: 50px; height: auto; margin-right: 10px;"> -->
+                                    <h6 class="mb-0"style="color:#304D30;">BCA</h6>
+                                </div>
                             </div>
+                            <div class="justify-content-between align-items-center mb-4 mt-4">
+                                <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                                    <h6 class="mx-3 mb-0"style="color:#304D30;">Subtotal untuk Produk</h6>
+                                    <h6 class="mx-3 mb-0"style="color:#304D30;">Rp 160.000</h6>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                                    <h6 class="mx-3 mb-0"style="color:#304D30;">Onkos Kirim</h6>
+                                    <h6 class="mx-3 mb-0"style="color:#304D30;">Rp 15.000</h6>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                                    <h6 class="mx-3 mb-0"style="color:#304D30;">Total Pembayaran</h6>
+                                    <h6 class="mx-3 mb-0"style="color:#304D30;">Rp 175.000</h6>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                        <!-- Checkout Button -->
+                        <div class="d-flex justify-content-end my-12-1">
+                            <a type="button" class="btn text-white" style="background-color: #768A6E;" href="{{url('/pembayaranKonsul')}}">PEMBAYARAN</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

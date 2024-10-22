@@ -80,7 +80,7 @@
             <div class="col-3 d-flex justify-content-end">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{url('/cart')}}">
                             <img src="{{ asset('images/cart.png') }}" alt="Atma" width="83" class= "me-4"
                                 height="35">
                         </a>

@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-
-
 Route::get('/reservation', function () {
     return view('reservation');
 })->name('reservation'); 
@@ -29,9 +26,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-
 Route::get('/about', function () {
-    return view('bout');
+    return view('about');
 })->name('about');
 
 Route::get('/obat/{id}', function (string $id) {
@@ -59,3 +55,20 @@ Route::get('/obat/{id}', function (string $id) {
         return redirect()->back()->with('error', 'Produk tidak ditemukan');
     }
 })->name('detailObat');
+
+Route::get('/transaksiCheckout',function(){
+    return view('/transaksiCheckout');
+})->name('transaksiCheckout');
+
+Route::get('/transaksiCheckoutKonsul',function(){
+    return view('/transaksiCheckoutKonsul');
+})->name('transaksiCheckoutKonsul');
+
+Route::get('/pembayaranObat',function(){
+    return view('/pembayaranObat');
+})->name('pembayaranObat');
+
+Route::get('/pembayaranKonsul',function(){
+    return view('/pembayaranKonsul');
+})->name('pembayaranKonsul');
+

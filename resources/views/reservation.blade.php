@@ -31,7 +31,7 @@
             <div class="card-body">
                 <h3 class="card-title mb-5 text-center fw-bold">Consultation Registration Form</h3>
 
-                <form action="{{ route('reservation') }}" method="POST">
+                <form action="{{ route('transaksiCheckoutKonsul') }}">
                     @csrf
                     <div class="container">
                         <div class="row">
