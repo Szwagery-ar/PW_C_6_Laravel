@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 $user = [
     'profil' => [
         'username' => '',
@@ -13,6 +14,7 @@ $user = [
     ]];
 
 session(['user' => $user]);
+
 
 Route::get('/reservation', function () {
     return view('reservation');
@@ -41,6 +43,7 @@ Route::get('/cart', function () {
 Route::get('/home', function () {
     return view('home');
 })->name('home');
+
 
 Route::get('/', function () {
     return view('login', ['error' => null]);
@@ -85,7 +88,7 @@ Route::get('/forgotpassword', function () {
 });
 
 Route::get('/about', function () {
-    return view('bout');
+    return view('about');
 })->name('about');
 
 Route::get('/obat/{id}', function (string $id) {
@@ -113,6 +116,22 @@ Route::get('/obat/{id}', function (string $id) {
         return redirect()->back()->with('error', 'Produk tidak ditemukan');
     }
 })->name('detailObat');
+
+Route::get('/transaksiCheckout',function(){
+    return view('/transaksiCheckout');
+})->name('transaksiCheckout');
+
+Route::get('/transaksiCheckoutKonsul',function(){
+    return view('/transaksiCheckoutKonsul');
+})->name('transaksiCheckoutKonsul');
+
+Route::get('/pembayaranObat',function(){
+    return view('/pembayaranObat');
+})->name('pembayaranObat');
+
+Route::get('/pembayaranKonsul',function(){
+    return view('/pembayaranKonsul');
+})->name('pembayaranKonsul');
 
 Route::post('/edit-profil', function () {
     $userData = [
