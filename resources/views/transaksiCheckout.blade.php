@@ -16,13 +16,41 @@
             display: flex;
             flex-direction: column; /* Membuat konten di dalamnya berorientasi vertikal */
         }
+        .px-10{
+            padding-left: 10rem;
+            padding-right: 10rem;
+        }
         .my-12-1{
             margin-top: 5rem;
             margin-bottom: 1rem;
         }
     </style>
     <div class="m-0 px-10" style="background-color: #F4F1E3;">
-        <div class="container py-5 ">
+        <div class="container pt-5 ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body mx-5">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex justify-content-start align-items-center mb-4 mt-4">
+                                    <img src="{{asset('images/IconSearch.png')}}" alt="search">
+                                    <h3 class="card-title" style="color:#768A6E;">Alamat Pengiriman</h3>
+                                </div>
+                                <div class="d-flex justify-content-end align-items-center mb-4 mt-4">
+                                    <a class="card-title" style="color:blue;" id="change" href="#">Ubah</a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-start">
+                                <input type="text" class="px-4 py-2 mx-0" id="catatan" name="catatan" placeholder="catatan" required>
+                                <input type="text" class="px-10 py-2 mr-3"id="alamat" name="alamat" placeholder="alamat" required>
+                            </div>
+                            <div class="px-auto py-1"><hr></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-5 ">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -92,6 +120,16 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body mx-5">
                             <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
                                 <div class="align-items-center mb-4 mt-4">
                                     <h6 class="mb-0"style="color:#304D30;">METODE PEMBAYARAN</h6>
@@ -134,6 +172,7 @@
                             <div class="d-flex justify-content-end my-12-1">
                                 <a type="button" class="btn text-white" style="background-color: #768A6E;" href="{{url('/pembayaranObat')}}">PEMBAYARAN</a>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
