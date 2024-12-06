@@ -7,7 +7,7 @@ $user = [
     'profil' => [
         'username' => '',
         'name' => '',
-        'paswrod' => '',
+        'password' => '',
         'phone' => '',
         'address' => '',
         'email' => '',
@@ -50,13 +50,17 @@ Route::get('/', function () {
 })->name('login');
 
 Route::post('/', function () {
+    if ($_POST["email"] == "" && $_POST['password'] == "") {
+        return view('/login', ['error' => 'Register Terlebih Dahulu!']); 
+    }
+
     if ($_POST['email'] == session('user')['profil']['email'] && 
         $_POST['password'] == session('user')['profil']['password']) {
         return view('home');
     }
 
-    if ($_POST["email"] == "" && $_POST['password'] == "") {
-        return view('/login', ['error' => 'Register Terlebih Dahulu!']); 
+    if ($_POST["email"] == "admin@admin.com" && $_POST['password'] == "1234") {
+        return view('admin.dashboard'); 
     }
 
     return view('/login', ['error' => 'Email / Username / Password Salah!']);
@@ -165,4 +169,35 @@ Route::post('/logout', function () {
     session(['user' => $userData]);
 
     return redirect('/');
+});
+
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+});
+Route::get('/admin/listofmedicines', function () {
+    return view('admin.listofmedicines');
+});
+Route::get('/admin/medicinegroups', function () {
+    return view('admin.medicinegroups');
+});
+Route::get('/admin/usermanagement', function () {
+    return view('admin.usermanagement');
+});
+
+
+Route::get('/admin/detail', function () {
+    return view('admin.detail');
+});
+Route::get('/admin/detailgroup', function () {
+    return view('admin.detailgroup');
+});
+Route::get('/admin/editmedicine', function () {
+    return view('admin.editmedicine');
+});
+Route::get('/admin/addmedicine', function () {
+    return view('admin.addmedicine');
+});
+Route::get('/admin/editprofile', function () {
+    return view('admin.editprofile');
 });
