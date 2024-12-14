@@ -57,6 +57,8 @@
                             <h1 class="text-success fw-bold">{{ $product['price'] }}</h1>
                             <form action="{{ route('cart', ['id' => $product['id'] ?? 1]) }}" method="POST">
                                 @csrf
+                                <input type="numeric" name="jumlah_obat" value="{{ 1 }}">
+                                <input type="hidden" name="id_obat" value="{{ 1 }}">
                                 <button type="submit" class="btn btn-primary fw-bold">Add To Cart</button>
                             </form>
                         </div>
