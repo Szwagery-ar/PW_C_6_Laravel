@@ -88,6 +88,30 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
+    }
+
+   
+    public function showProfilForm() {
+        $user = Auth::user();
+        return view('profil', compact('user'));
+    }
+    
+    public function update(Request $request, $id)
+    {
+        // Validasi data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:20',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'address' => 'nullable|string|max:255',
+        ]);
+
+        // Update user data
+        $user = User::findOrFail($id);
+        $user->update($validatedData);
+
+        // Redirect or respond with success
+        return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 }

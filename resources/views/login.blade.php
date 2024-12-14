@@ -55,8 +55,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-radius: 0px 230px 230px 0px;
+            border-radius: 230px 0px 0px 230px;
         }
+
 
         .info-section h1 {
             font-size: 50px;
@@ -133,19 +134,13 @@
 
 <body>
     <div class="card-section">
-        <!-- Left info-section -->
-        <div class="info-section">
-            <img src="{{ asset('images/Logo.png') }}" alt="Atma" width="190" height="65" class="mb-5">
-            <h1><strong>Hello, Friend!</strong></h1>
-            <p>Register with your personal details and start your health journey with us.</p>
-            <a href="/register" class="btn btn-outline-light">SIGN UP</a>
-        </div>
 
-        <!-- Right login-section -->
+
+        <!-- Left login-section -->
         <div class="login-section">
             <span class="img-logo d-flex align-items-start"><img src="{{ asset('images/green-logo.png') }}"
                     alt=""></span>
-            <h1 class="mb-4 text-center" style="color:#768A6E;"><strong>Sign in to Apotek Atma</strong></h1>
+            <h1 class="mb-4 mt-4 text-center" style="color:#768A6E;"><strong>Sign in to Apotek Atma</strong></h1>
             <div class="social-icons mb-3 text-center">
                 <a href="#"><i class="bi bi-facebook"></i></a>
                 <a href="#"><i class="bi bi-google"></i></a>
@@ -199,6 +194,7 @@
             </form>
         </div>
 
+        <!-- Right login-section -->
         <div class="info-section">
             <h1><strong>Hello, Friend!</strong></h1>
             <p>Enter your personal details and start your health journey with us.</p>

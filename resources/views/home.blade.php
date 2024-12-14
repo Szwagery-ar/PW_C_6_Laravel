@@ -100,7 +100,7 @@
 
     <div class="me-5 mt-3">
         <h4 class="d-flex justify-content-end fw-bold">Book a consultation?
-            <a href="{{ route('reservation') }}" class="btn btn-primary text-light fw-bold ms-2 mb-3">BOOK NOW</a>
+            <a href="{{ route('reservasi') }}" class="btn btn-primary text-light fw-bold ms-2 mb-3">BOOK NOW</a>
         </h4>
     </div>
 
@@ -121,7 +121,7 @@
                 ['image' => 'image7.png', 'title' => 'Personal Care'],
                 ['image' => 'image8.png', 'title' => 'Menstrual Hygiene'],
             ];
-            
+
         @endphp
 
         @foreach ($data as $obat)
@@ -134,7 +134,7 @@
                         <h5 class="text-center text-lg font-semibold text-gray-800">{{ $obat->nama_obat }}</h5>
                     </div>
                 </div>
-                
+
             </a>
         @endforeach
     </div>
@@ -148,7 +148,8 @@
             @if ($obat)
                 <div class="flex flex-col items-center">
                     <div class="card flex flex-col justify-between items-center p-3 bg-white shadow-lg rounded-lg">
-                        <img class="h-48 w-full object-cover rounded-t-lg" src="{{ asset('images/'. $obat->image) }}" alt="{{ $obat->nama_obat }}">
+                        <img class="h-48 w-full object-cover rounded-t-lg" src="{{ asset('images/' . $obat->image) }}"
+                            alt="{{ $obat->nama_obat }}">
                         <div class="mt-2 text-center">
                             <h5 class="text-lg font-semibold text-gray-800">{{ $obat->nama_obat }}</h5>
                             <h6 class="text-sm text-gray-500">Rp.{{ $obat->harga_obat }}</h6>
