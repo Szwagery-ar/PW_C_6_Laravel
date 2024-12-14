@@ -121,17 +121,20 @@
                 ['image' => 'image7.png', 'title' => 'Personal Care'],
                 ['image' => 'image8.png', 'title' => 'Menstrual Hygiene'],
             ];
+            
         @endphp
 
-        @foreach ($categories as $category)
+        @foreach ($data as $obat)
             <a href="{{ route('jenisObat') }}" class="flex flex-col items-center">
+
                 <div class="card flex flex-col justify-between items-center p-3 bg-white shadow-lg rounded-lg">
-                    <img src="{{ asset('images/' . $category['image']) }}" alt="{{ $category['title'] }}"
+                    <img src="{{ asset('images/' . $obat->image) }}" alt="{{ $obat->nama_obat }}"
                         class="h-48 w-full object-cover rounded-t-lg">
                     <div class="mt-2">
-                        <h5 class="text-center text-lg font-semibold text-gray-800">{{ $category['title'] }}</h5>
+                        <h5 class="text-center text-lg font-semibold text-gray-800">{{ $obat->nama_obat }}</h5>
                     </div>
                 </div>
+                
             </a>
         @endforeach
     </div>
@@ -140,32 +143,19 @@
     <div class="ms-5 mt-5">
         <h3 class="d-flex justify-content-start fw-bold text-black-50">New Launches</h3>
     </div>
-
     <div class="owl-carousel owl-theme mt-4">
-        @php
-            $newLaunches = [
-                ['image' => 'image25.webp', 'title' => 'HIMALAYA KAPI KACCHU', 'subtitle' => 'Rp 35.500,-/bottle'],
-                ['image' => 'image26.jpg', 'title' => 'SELSUN SHAMPOO', 'subtitle' => 'Rp 25.500,-/bottle'],
-                ['image' => 'image25.png', 'title' => 'OSKADON TABLET', 'subtitle' => 'Rp 2.500,-/strip'],
-                ['image' => 'image27.webp', 'title' => 'MASTIN', 'subtitle' => 'Rp 45.500,-/bottle'],
-                ['image' => 'image24.webp', 'title' => 'SUMAGESIC TABLET', 'subtitle' => 'Rp 2.500,-/strip'],
-                ['image' => 'image23.webp', 'title' => 'CHARM PADS', 'subtitle' => 'Rp 10.500,-/pack'],
-                ['image' => 'images21.jpg', 'title' => 'MYLANTA LIQUID', 'subtitle' => 'Rp 10.500,-/bottle'],
-                ['image' => 'image22.png', 'title' => 'TOLAK ANGIN LIQUID', 'subtitle' => 'Rp 15.000,-/pack'],
-            ];
-        @endphp
-
-        @foreach ($newLaunches as $item)
-            <div class="flex flex-col items-center">
-                <div class="card flex flex-col justify-between items-center p-3 bg-white shadow-lg rounded-lg">
-                    <img src="{{ asset('images/' . $item['image']) }}" alt="{{ $item['title'] }}"
-                        class="h-48 w-full object-cover rounded-t-lg">
-                    <div class="mt-2 text-center">
-                        <h5 class="text-lg font-semibold text-gray-800">{{ $item['title'] }}</h5>
-                        <h6 class="text-sm text-gray-500">{{ $item['subtitle'] }}</h6>
+        @foreach ($data as $obat)
+            @if ($obat)
+                <div class="flex flex-col items-center">
+                    <div class="card flex flex-col justify-between items-center p-3 bg-white shadow-lg rounded-lg">
+                        <img class="h-48 w-full object-cover rounded-t-lg" src="{{ asset('images/'. $obat->image) }}" alt="{{ $obat->nama_obat }}">
+                        <div class="mt-2 text-center">
+                            <h5 class="text-lg font-semibold text-gray-800">{{ $obat->nama_obat }}</h5>
+                            <h6 class="text-sm text-gray-500">Rp.{{ $obat->harga_obat }}</h6>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         @endforeach
     </div>
 
