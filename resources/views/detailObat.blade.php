@@ -55,7 +55,7 @@
                     <!-- Kontainer harga dan tombol -->
                     <div class="price-btn-container">
                         <h1 class="text-success fw-bold">{{ $product['harga_obat'] }}</h1>
-                        <form action="{{ route('addToCart', ['id' => $product->id_obat]) }}" method="POST">
+                        <form action="{{ route('addToCart', ['id' => $product->id]) }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-primary fw-bold">Add To Cart</button>
                         </form>

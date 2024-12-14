@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ATMA - Health Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
@@ -13,6 +18,7 @@
     <style>
         body {
             background-color: #F4F1E3;
+            font-family: 'Poppins', sans-serif;
         }
 
         .navbar {
@@ -57,6 +63,11 @@
         .footer {
             background-color: #768A6E;
             padding: 20px 0;
+            margin-top: 8.6rem;
+        }
+
+        * {
+            font-family: "Montserrat", sans-serif;
         }
     </style>
 </head>
@@ -66,7 +77,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="row mx-2" style="flex-grow: 1">
             <div class="col-3">
-                <a class="navbar-brand" href="/home">
+                <a class="navbar-brand" href="{{'/home'}}">
                     <img src="{{ asset('images/Logo.png') }}" alt="Atma" width="135" height="50">
                 </a>
             </div>

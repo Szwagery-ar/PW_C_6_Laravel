@@ -110,7 +110,7 @@ class TransaksiController extends Controller
             } else {
                 $cart[$id] = [
                     'selected' => false,
-                    'id_obat' => $obat['id_obat'],
+                    'id' => $obat['id'],
                     'nama_obat' => $obat['nama_obat'],
                     'harga_obat' => $obat['harga_obat'],
                     'image' => $obat['image'],

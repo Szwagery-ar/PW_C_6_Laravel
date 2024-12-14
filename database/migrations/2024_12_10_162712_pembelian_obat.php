@@ -17,7 +17,7 @@ return new class extends Migration
             function (Blueprint $table) {
                 $table->id('id_pembelian_obat');
                 $table->foreignId('id_transaksi')->constrained('transaksi', 'id_transaksi')->onDelete('cascade');
-                $table->foreignId('id_obat')->constrained('obat', 'id_obat')->onDelete('cascade');
+                $table->foreignId('id_obat')->constrained('obats', 'id')->onDelete('cascade');
                 $table->double('harga_obat');
                 $table->integer('jumlah_obat');
             }

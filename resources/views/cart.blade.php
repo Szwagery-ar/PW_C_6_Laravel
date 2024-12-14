@@ -49,10 +49,10 @@
                                     <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
                                         <div class="d-flex align-items-center">
                                             <input class="form-check-input mt-0" type="checkbox" name="selected_items[]"
-                                                value="{{ $item['id_obat'] }}"
+                                                value="{{ $item['id'] }}"
                                                 aria-label="Checkbox for following text input"
                                                 {{ $item['selected'] ? 'checked' : '' }}
-                                                onclick="toggleItemStatus({{ $item['id_obat'] }})">
+                                                onclick="toggleItemStatus({{ $item['id'] }})">
                                             <img src="{{ asset('images/' . $item['image']) }}"
                                                 alt="{{ $item['nama_obat'] }}"
                                                 style="width: 50px; height: auto; margin-right: 10px;">
@@ -69,7 +69,7 @@
                                             <div style="width: 120px;">
                                                 <div class="input-group mb-3">
                                                     <form
-                                                        action="{{ route('setValueCart', ['id' => $item['id_obat'], 'value' => -1]) }}"
+                                                        action="{{ route('setValueCart', ['id' => $item['id'], 'value' => -1]) }}"
                                                         method="POST" style="display:inline;">
                                                         @csrf
                                                         <button class="btn btn-outline-secondary btn-decrease"
@@ -78,7 +78,7 @@
                                                     <input type="text" class="form-control text-center"
                                                         value="{{ $item['jumlah_obat'] }}" disabled>
                                                     <form
-                                                        action="{{ route('setValueCart', ['id' => $item['id_obat'], 'value' => 1]) }}"
+                                                        action="{{ route('setValueCart', ['id' => $item['id'], 'value' => 1]) }}"
                                                         method="POST" style="display:inline;">
                                                         @csrf
                                                         <button class="btn btn-outline-secondary btn-increase"
