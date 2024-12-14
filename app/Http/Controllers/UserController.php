@@ -11,6 +11,7 @@ class UserController extends Controller
 {
     public function showLoginForm()
     {
+        session()->forget('cart');
         return view('login');
     }
 

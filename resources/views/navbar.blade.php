@@ -81,14 +81,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('/cart')}}">
-                            <img src="{{ asset('images/cart.png') }}" alt="Atma" width="83" class= "me-4"
+                            <img src="{{ asset('images/cart.png') }}" alt="Atma" width="83" class="me-4"
                                 height="35">
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('profil') }}">
                             <img src="{{ asset('images/profilKosong.png') }}" alt="Atma" width="45"
-                                class= "me-4" height="40">
+                                class="me-4" height="40">
                         </a>
                     </li>
                 </ul>
@@ -100,6 +100,19 @@
     <div>
         @yield('content')
     </div>
+
+    @if (session('successToast') || session('errorToast'))
+    <div class="toast-container position-fixed bottom-0 start-0 p-3" style="z-index: 1055;">
+        <div class="toast align-items-center text-white {{ session('successToast') ? 'bg-success' : 'bg-danger' }} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{ session('successToast') ?? session('errorToast') }}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    @endif
 
     <!-- Footer -->
     <footer class="footer">
@@ -130,6 +143,16 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            var toastList = toastElList.map(function(toastEl) {
+                return new bootstrap.Toast(toastEl);
+            });
+            toastList.forEach(toast => toast.show());
+        });
+    </script>
 
     <script>
         const obatArray = [

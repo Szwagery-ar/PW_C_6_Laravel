@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\TransaksiController;
 
 use Illuminate\Http\Request;
 
@@ -14,18 +16,19 @@ $user = [
         'phone' => '',
         'address' => '',
         'email' => '',
-    ]];
+    ]
+];
 
 session(['user' => $user]);
 
 
 Route::get('/reservation', function () {
     return view('reservation');
-})->name('reservation'); 
+})->name('reservation');
 
 Route::get('/profil', function () {
     return view('profil');
-})->name('profil'); 
+})->name('profil');
 
 Route::get('/obat', function () {
     return view('obat');
@@ -48,12 +51,29 @@ Route::get('/home', function () {
 })->name('home');
 
 
+Route::get("/", function () {
+    session()->forget('cart');
+    return view('login');
+});
 // Authentication Routes
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(
+    function () {
+        Route::get('/obat', [ObatController::class, 'index'])->name('getObat');
+        Route::get('/detail-obat/{id}', [ObatController::class, 'detail'])->name('getDetailObat');
+        Route::post('/add-to-cart/{id}', [TransaksiController::class, 'addToCart'])->name('addToCart');
+        Route::get('/cart', [TransaksiController::class, 'getCart'])->name('getCart');
+        Route::post('/cart/{id}/{value}', [TransaksiController::class, 'setValueCart'])->name('setValueCart');
+        Route::post('/checkout', [TransaksiController::class, 'checkout'])->name('checkout');
+        Route::post('/active-item/{id}', [TransaksiController::class, 'activeItem'])->name('activeItem');
+        Route::post('/payment-obat', [TransaksiController::class, 'storePembelianObat'])->name('paymentObat');
+    }
+);
 
 Route::get('/forgotpassword', function () {
     return view('forgotpassword');
@@ -79,29 +99,29 @@ Route::get('/obat/{id}', function (string $id) {
         12 => ['image' => 'image12.png', 'name' => 'Ketonof', 'description' => 'Ketoconazole Shampoo is a powerful antifungal treatment formulated to combat dandruff and other scalp conditions, effectively soothing irritation and reducing flaking. This 100ml bottle offers a convenient size for easy use at home or on the go, ensuring a healthy and balanced scalp.', 'price' => 'Rp 125.000', 'dosage' => 'Twice a week for the first 2 to 4 weeks.', 'type' => 'Liquid'],
     ];
 
-   
+
     if (array_key_exists($id, $products)) {
-        
+
         return view('detailObat', ['product' => $products[$id]]);
     } else {
-      
+
         return redirect()->back()->with('error', 'Produk tidak ditemukan');
     }
 })->name('detailObat');
 
-Route::get('/transaksiCheckout',function(){
+Route::get('/transaksiCheckout', function () {
     return view('/transaksiCheckout');
 })->name('transaksiCheckout');
 
-Route::get('/transaksiCheckoutKonsul',function(){
+Route::get('/transaksiCheckoutKonsul', function () {
     return view('/transaksiCheckoutKonsul');
 })->name('transaksiCheckoutKonsul');
 
-Route::get('/pembayaranObat',function(){
-    return view('/pembayaranObat');
-})->name('pembayaranObat');
+// Route::get('/pembayaranObat',function(){
+//     return view('/pembayaranObat');
+// })->name('pembayaranObat');
 
-Route::get('/pembayaranKonsul',function(){
+Route::get('/pembayaranKonsul', function () {
     return view('/pembayaranKonsul');
 })->name('pembayaranKonsul');
 
@@ -116,7 +136,7 @@ Route::post('/edit-profil', function () {
             'address' => $_POST['address']
         ]
     ];
-    
+
     session(['user' => $userData]);
 
     return redirect('/profil');
@@ -133,7 +153,7 @@ Route::post('/logout', function () {
             'address' => ''
         ]
     ];
-    
+
     session(['user' => $userData]);
 
     return redirect('/');
