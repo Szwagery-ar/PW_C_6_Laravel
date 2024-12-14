@@ -143,63 +143,88 @@
 
         <!-- Right login-section -->
         <div class="login-section">
-            <div class="centered-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="mt-3 mb-4 text-center" style="color:#768A6E;"><strong>Sign In</strong></h1>
-                        <div class="social-icons mt-1 text-center">
-                            <a href="#"><i class="bi bi-google"></i></a>
-                            <a href="#"><i class="bi bi-instagram"></i></a>
-                            <a href="#"><i class="bi bi-facebook"></i></a>
-                            <a href="#"><i class="bi bi-telephone"></i></a>
+            <span class="img-logo d-flex align-items-start"><img src="{{ asset('images/green-logo.png') }}"
+                    alt=""></span>
+            <h1 class="mb-4 text-center" style="color:#768A6E;"><strong>Sign in to Apotek Atma</strong></h1>
+            <div class="social-icons mb-3 text-center">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-google"></i></a>
+                <a href="#"><i class="bi bi-telephone"></i></a>
+            </div>
+            <p class="mt-4 mb-4 text-center">Or use Your Email Account</p>
+            <form method="POST" action="{{ route('login') }}" class="text-center">
+                @csrf
+
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                <div class="row">
+                    <div class="mb-3 d-flex justify-content-center">
+                        <div class="form-login input-group">
+                            <span class="input-group-text bg-light">
+                                <i class="bi bi-envelope"></i>
+                            </span>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                                required>
                         </div>
-                        <p class="mt-5 mb-3 text-center">or use your email account</p>
-                        <!-- Error Message if any -->
-                        @if ($error !== null)
-                            <div class="alert alert-warning align-self-center" role="alert">
-                                {{ $error }}
-                            </div>
-                        @endif
-                        <form class="text-center" action='/' method='POST'>
-                            @csrf
-                            <div class="row">
-                                <div class="mb-3 d-flex justify-content-center">
-                                    <div class="form-login input-group">
-                                        <span class="input-group-text bg-light">
-                                            <i class="bi bi-envelope"></i>
-                                        </span>
-                                        <input type="email" class="form-control" id="email" placeholder="Email"
-                                            name="email">
-                                    </div>
-                                </div>
-                                <div class="mb-3 d-flex justify-content-center">
-                                    <div class="form-login input-group">
-                                        <span class="input-group-text bg-light">
-                                            <i class="bi bi-three-dots"></i>
-                                        </span>
-                                        <input type="password" class="form-control" id="password"
-                                            placeholder="Password" name="password">
-                                        <span class="input-group-text bg-light">
-                                            <i class="bi bi-eye"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3 text-center mt-4">
-                                <a href="/forgotpassword" class="text-decoration-none text-dark">Forget Your
-                                    Password?</a>
-                            </div>
-                            <button type="submit" class="btn sign-in-btn rounded-pill">SIGN IN</button>
-                        </form>
+                    </div>
+
+                    <div class="mb-3 d-flex justify-content-center">
+                        <div class="form-login input-group">
+                            <span class="input-group-text bg-light">
+                                <i class="bi bi-three-dots"></i>
+                            </span>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Password" required>
+                            <span class="input-group-text bg-light cursor-pointer" onclick="togglePassword()">
+                                <i class="bi bi-eye" id="passwordToggleIcon"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="mb-3 d-flex justify-content-center align-items-center">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                        <label class="form-check-label" for="remember">
+                            Remember me
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn sign-in-btn rounded-pill" style="width: 17%;">SIGN IN</button>
+            </form>
+        </div>
+
+        <div class="info-section">
+            <h1><strong>Hello, Friend!</strong></h1>
+            <p>Enter your personal details and start your health journey with us.</p>
+            <a href="{{ route('register') }}" class="btn btn-outline-light">SIGN UP</a>
         </div>
     </div>
 
     <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Simplified JavaScript -->
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const icon = document.getElementById('passwordToggleIcon');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        }
     </script>
 </body>
 

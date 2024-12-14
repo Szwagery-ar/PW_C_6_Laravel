@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
+use Illuminate\Http\Request;
 
 
 $user = [
@@ -45,47 +48,12 @@ Route::get('/home', function () {
 })->name('home');
 
 
-Route::get('/', function () {
-    return view('login', ['error' => null]);
-})->name('login');
-
-Route::post('/', function () {
-    if ($_POST["email"] == "" && $_POST['password'] == "") {
-        return view('/login', ['error' => 'Register Terlebih Dahulu!']); 
-    }
-
-    if ($_POST['email'] == session('user')['profil']['email'] && 
-        $_POST['password'] == session('user')['profil']['password']) {
-        return view('home');
-    }
-
-    if ($_POST["email"] == "admin@admin.com" && $_POST['password'] == "1234") {
-        return view('admin.dashboard'); 
-    }
-
-    return view('/login', ['error' => 'Email / Username / Password Salah!']);
-});
-
-Route::get('/register', function () {
-    return view('register');
-});
-
-Route::post('/register', function () {
-    $userData = [
-        'profil' => [
-            'username' => $_POST['username'],
-            'name' => $_POST['name'],
-            'password' => $_POST['password'],
-            'phone' => $_POST['phone'],
-            'email' => $_POST['email'],
-            'address' => $_POST['address']
-        ]
-    ];
-    
-    session(['user' => $userData]);
-
-    return redirect('/');
-});
+// Authentication Routes
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UserController::class, 'login']);
+Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/forgotpassword', function () {
     return view('forgotpassword');
