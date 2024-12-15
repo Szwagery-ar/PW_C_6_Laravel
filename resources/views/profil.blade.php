@@ -70,36 +70,32 @@
                     </div>
                     <div class="col-7">
                         <!-- Profil Info -->
-                        <form id="profile-form" action="edit-profil" method="POST">
+                        <form id="profile-form" action="{{ route('profile.update', $user->id) }}" method="POST">
                             @csrf
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" disabled required
-                                    value={{ session('user')['profil']['username'] }}>
-                            </div>
+                            @method('PUT')
 
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control" id="name" name="name" disabled required
-                                    value={{ session('user')['profil']['name'] }}>
+                                    value="{{ $user->name }}">
                             </div>
 
                             <div class="mb-3">
-                                <label for="phone" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" id="phone" name="phone" disabled required
-                                    value={{ session('user')['profil']['phone'] }}>
+                                <label for="phone_number" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="phone_number" name="phone_number" disabled
+                                    required value="{{ $user->phone_number }}">
                             </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" disabled required
-                                    value={{ session('user')['profil']['email'] }}>
+                                    value="{{ $user->email }}">
                             </div>
 
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
                                 <input type="text" class="form-control" id="address" name="address" disabled required
-                                    value={{ session('user')['profil']['address'] }}>
+                                    value="{{ $user->address }}">
                             </div>
 
                             <!-- Tombol Edit -->
@@ -130,10 +126,11 @@
     <script>
         let simpan = {
             'name': document.getElementById('name').value,
-            'phone': document.getElementById('name').value,
+            'phone': document.getElementById('phone_number').value,
             'email': document.getElementById('email').value,
             'address': document.getElementById('address').value
-        }
+        };
+
         document.getElementById('profile-pic').addEventListener('click', function() {
             document.getElementById('profile-pic-input').click();
         });
@@ -150,7 +147,7 @@
         // untuk mengaktifkan edit
         document.getElementById('edit-profile-btn').addEventListener('click', function() {
             document.getElementById('name').disabled = false;
-            document.getElementById('phone').disabled = false;
+            document.getElementById('phone_number').disabled = false;
             document.getElementById('email').disabled = false;
             document.getElementById('address').disabled = false;
             document.getElementById('save-profile-btn').classList.remove('d-none');
@@ -158,21 +155,21 @@
             this.classList.add('d-none');
             simpan = {
                 'name': document.getElementById('name').value,
-                'phone': document.getElementById('name').value,
+                'phone': document.getElementById('phone_number').value,
                 'email': document.getElementById('email').value,
                 'address': document.getElementById('address').value
-            }
+            };
         });
 
         // untuk membatalkan edit
         document.getElementById('cancel-profile-btn').addEventListener('click', function() {
             document.getElementById('name').disabled = true;
-            document.getElementById('phone').disabled = true;
+            document.getElementById('phone_number').disabled = true;
             document.getElementById('email').disabled = true;
             document.getElementById('address').disabled = true;
 
             document.getElementById('name').value = simpan.name;
-            document.getElementById('phone').value = simpan.phone;
+            document.getElementById('phone_number').value = simpan.phone;
             document.getElementById('email').value = simpan.email;
             document.getElementById('address').value = simpan.address;
 
