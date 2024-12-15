@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {
@@ -89,5 +90,34 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+
+
+
+
+    //UNTUK ADMIN
+    public function adminDashboard()
+    {
+        $totalCustomers = User::where('role', 'customer')->count();
+        return view('admin.dashboard', compact('totalCustomers'));
+    }
+
+    public function userManagement(Request $request)
+    {
+        $query = User::where('role', 'customer');
+
+        if ($request->has('search')) {
+            $searchTerm = $request->search;
+            $query->where('name', 'LIKE', "%{$searchTerm}%");
+        }
+
+        $users = $query->paginate(8);
+        $totalUsers = $query->count();
+
+        return view('admin.usermanagement', [
+            'users' => $users,
+            'totalUsers' => $totalUsers
+        ]);
     }
 }

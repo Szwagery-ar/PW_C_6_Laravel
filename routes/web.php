@@ -1,22 +1,22 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Http\Request;
 
+// Authentication Routes
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
+Route::get('/', [UserController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UserController::class, 'login']);
+Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-$user = [
-    'profil' => [
-        'username' => '',
-        'name' => '',
-        'password' => '',
-        'phone' => '',
-        'address' => '',
-        'email' => '',
-    ]];
 
-session(['user' => $user]);
+
+
 
 
 Route::get('/reservation', function () {
@@ -48,12 +48,6 @@ Route::get('/home', function () {
 })->name('home');
 
 
-// Authentication Routes
-Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [UserController::class, 'login']);
-Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [UserController::class, 'register']);
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/forgotpassword', function () {
     return view('forgotpassword');
@@ -140,18 +134,18 @@ Route::post('/logout', function () {
 });
 
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-});
+
+
+
+Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+
 Route::get('/admin/listofmedicines', function () {
     return view('admin.listofmedicines');
 });
 Route::get('/admin/medicinegroups', function () {
     return view('admin.medicinegroups');
 });
-Route::get('/admin/usermanagement', function () {
-    return view('admin.usermanagement');
-});
+Route::get('/admin/usermanagement', [AdminController::class, 'userManagement'])->name('admin.users');
 
 
 Route::get('/admin/detail', function () {
@@ -166,6 +160,7 @@ Route::get('/admin/editmedicine', function () {
 Route::get('/admin/addmedicine', function () {
     return view('admin.addmedicine');
 });
-Route::get('/admin/editprofile', function () {
-    return view('admin.editprofile');
-});
+
+Route::get('/admin/editprofile/{user}', [AdminController::class, 'editUser'])->name('admin.editprofile');
+Route::put('/admin/editprofile/{user}', [AdminController::class, 'updateUser'])->name('admin.updateUser');
+Route::delete('/admin/editprofile/{user}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
