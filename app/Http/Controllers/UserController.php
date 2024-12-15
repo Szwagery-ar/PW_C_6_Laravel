@@ -6,17 +6,20 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
-    public function showLoginForm()
+
+  public function showLoginForm()
     {
         return view('login');
     }
-
+      
     public function login(Request $request)
     {
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -49,7 +52,6 @@ class UserController extends Controller
 
         return back()->with('error', 'Email atau password yang Anda masukkan salah!');
     }
-
     public function showRegistrationForm()
     {
         return view('register');
@@ -89,35 +91,29 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 
-
-
-
-
-    //UNTUK ADMIN
-    public function adminDashboard()
-    {
-        $totalCustomers = User::where('role', 'customer')->count();
-        return view('admin.dashboard', compact('totalCustomers'));
+   
+    public function showProfilForm() {
+        $user = Auth::user();
+        return view('profil', compact('user'));
     }
 
-    public function userManagement(Request $request)
+    public function update(Request $request, $id)
     {
-        $query = User::where('role', 'customer');
-
-        if ($request->has('search')) {
-            $searchTerm = $request->search;
-            $query->where('name', 'LIKE', "%{$searchTerm}%");
-        }
-
-        $users = $query->paginate(8);
-        $totalUsers = $query->count();
-
-        return view('admin.usermanagement', [
-            'users' => $users,
-            'totalUsers' => $totalUsers
+        // Validasi data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:20',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'address' => 'nullable|string|max:255',
         ]);
-    }
-}
+
+        // Update user data
+        $user = User::findOrFail($id);
+        $user->update($validatedData);
+
+        // Redirect or respond with success
+        return redirect()->back()->with('success', 'Profile updated successfully!');
+    } 
