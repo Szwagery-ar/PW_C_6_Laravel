@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
-
 class UserController extends Controller
 {
 
@@ -100,7 +99,7 @@ class UserController extends Controller
         $user = Auth::user();
         return view('profil', compact('user'));
     }
-    
+
     public function update(Request $request, $id)
     {
         // Validasi data
@@ -118,4 +117,3 @@ class UserController extends Controller
         // Redirect or respond with success
         return redirect()->back()->with('success', 'Profile updated successfully!');
     } 
-}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReservasiController;
@@ -8,17 +9,17 @@ use Illuminate\Support\Facades\Route;
 
 use Illuminate\Http\Request;
 
+// Authentication Routes
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
+Route::get('/', [UserController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UserController::class, 'login']);
+Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-$user = [
-    'profil' => [
-        'name' => '',
-        'password' => '',
-        'phone_number' => '',
-        'address' => '',
-        'email' => '',
-    ]];
 
-session(['user' => $user]);
+
+
 
 Route::get('/', function () {
     return redirect('/login');
@@ -77,7 +78,6 @@ Route::get('/jenisObat/{jenis}', [ObatController::class, 'getAllObatByJenis'])->
 Route::get('/cart', function(){
     return view('cart');
 })->name('cart');
-
 
 Route::get('/about', function () {
     return view('about');
@@ -138,18 +138,53 @@ Route::get('/pembayaranKonsul',function(){
     return view('/pembayaranKonsul');
 })->name('pembayaranKonsul');
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
+Route::post('/edit-profil', function () {
+    $userData = [
+        'profil' => [
+            'username' => session('user')['profil']['username'],
+            'name' => $_POST['name'],
+            'password' => session('user')['profil']['password'],
+            'phone' => $_POST['phone'],
+            'email' => $_POST['email'],
+            'address' => $_POST['address']
+        ]
+    ];
+    
+    session(['user' => $userData]);
+
+    return redirect('/profil');
 });
+
+Route::post('/logout', function () {
+    $userData = [
+        'profil' => [
+            'username' => '',
+            'name' => '',
+            'password' => '',
+            'phone' => '',
+            'email' => '',
+            'address' => ''
+        ]
+    ];
+    
+    session(['user' => $userData]);
+
+    return redirect('/');
+});
+
+
+
+
+
+Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+
 Route::get('/admin/listofmedicines', function () {
     return view('admin.listofmedicines');
 });
 Route::get('/admin/medicinegroups', function () {
     return view('admin.medicinegroups');
 });
-Route::get('/admin/usermanagement', function () {
-    return view('admin.usermanagement');
-});
+Route::get('/admin/usermanagement', [AdminController::class, 'userManagement'])->name('admin.users');
 
 
 Route::get('/admin/detail', function () {
@@ -164,6 +199,7 @@ Route::get('/admin/editmedicine', function () {
 Route::get('/admin/addmedicine', function () {
     return view('admin.addmedicine');
 });
-Route::get('/admin/editprofile', function () {
-    return view('admin.editprofile');
-});
+
+Route::get('/admin/editprofile/{user}', [AdminController::class, 'editUser'])->name('admin.editprofile');
+Route::put('/admin/editprofile/{user}', [AdminController::class, 'updateUser'])->name('admin.updateUser');
+Route::delete('/admin/editprofile/{user}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
