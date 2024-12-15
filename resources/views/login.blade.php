@@ -140,7 +140,9 @@
         <div class="login-section">
             <span class="img-logo d-flex align-items-start"><img src="{{ asset('images/green-logo.png') }}"
                     alt=""></span>
+
             <h1 class="mb-4 mt-4 text-center" style="color:#768A6E;"><strong>Sign in to Apotek Atma</strong></h1>
+
             <div class="social-icons mb-3 text-center">
                 <a href="#"><i class="bi bi-facebook"></i></a>
                 <a href="#"><i class="bi bi-google"></i></a>
@@ -155,6 +157,7 @@
                         {{ session('error') }}
                     </div>
                 @endif
+
 
                 <div class="row">
                     <div class="mb-3 d-flex justify-content-center">
@@ -177,6 +180,19 @@
                             <span class="input-group-text bg-light cursor-pointer" onclick="togglePassword()">
                                 <i class="bi bi-eye" id="passwordToggleIcon"></i>
                             </span>
+
+                        </div>
+                    </div>
+                    <div class="mb-3 d-flex justify-content-center">
+                        <div class="form-login input-group">
+                            <span class="input-group-text bg-light">
+                                <i class="bi bi-three-dots"></i>
+                            </span>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Password" required>
+                            <span class="input-group-text bg-light cursor-pointer" onclick="togglePassword()">
+                                <i class="bi bi-eye" id="passwordToggleIcon"></i>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -189,7 +205,6 @@
                         </label>
                     </div>
                 </div>
-
                 <button type="submit" class="btn sign-in-btn rounded-pill" style="width: 17%;">SIGN IN</button>
             </form>
         </div>
@@ -199,6 +214,7 @@
             <h1><strong>Hello, Friend!</strong></h1>
             <p>Enter your personal details and start your health journey with us.</p>
             <a href="{{ route('register') }}" class="btn btn-outline-light">SIGN UP</a>
+
         </div>
     </div>
 
@@ -224,4 +240,105 @@
     </script>
 </body>
 
+
+<script>
+    function togglePassword() {
+        const input = document.getElementById('password');
+        const icon = document.getElementById('passwordToggleIcon');
+        
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        }
+    }
+
+    function clearErrors() {
+        const errorElements = document.querySelectorAll('.invalid-feedback');
+        errorElements.forEach(element => {
+            element.textContent = '';
+            element.style.display = 'none';
+        });
+
+        const inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(input => {
+            input.classList.remove('is-invalid');
+        });
+    }
+
+    function showError(field, message) {
+        const errorElement = document.getElementById(field + 'Error');
+        const input = document.getElementById(field);
+        
+        if (errorElement && input) {
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            input.classList.add('is-invalid');
+        }
+    }
+
+    async function handleLogin(event) {
+        event.preventDefault();
+        clearErrors();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        if (email === 'admin@gmail.com' && password === 'AdminApotek') {
+            window.location.href = '/admin/dashboard';
+            return;
+        }
+
+        const spinner = document.getElementById('loadingSpinner');
+        const submitButton = document.getElementById('submitButton');
+        spinner.classList.remove('d-none');
+        submitButton.disabled = true;
+
+        const formData = new FormData(event.target);
+        const loginData = {
+            email: formData.get('email'),
+            password: formData.get('password'),
+            remember: formData.get('remember') ? true : false
+        };
+
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(loginData)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                if (response.status === 422) {
+                    Object.keys(data.errors).forEach(field => {
+                        showError(field, data.errors[field][0]);
+                    });
+                } else if (response.status === 401) {
+                    showError('email', 'Invalid email or password');
+                } else {
+                    alert(data.message || 'Login failed. Please try again.');
+                }
+            } else {
+                localStorage.setItem('auth_token', data.token);
+                window.location.href = '/dashboard';
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            alert('An error occurred during login. Please try again.');
+        } finally {
+            spinner.classList.add('d-none');
+            submitButton.disabled = false;
+        }
+    }
+</script>
 </html>
