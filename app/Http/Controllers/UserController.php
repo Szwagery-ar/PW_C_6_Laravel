@@ -105,13 +105,24 @@ class UserController extends Controller
             'phone_number' => 'required|string|max:20',
             'email' => 'required|email|unique:users,email,' . $id,
             'address' => 'nullable|string|max:255',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
+        
+        
+        if ($request->hasFile('profile_photo')) {
+            $path = $request->file('profile_photo')->store('profile-photos', 'public');
+            $validatedData['profile_photo_path'] = $path;
+        }
 
         // Update user data
         $user = User::findOrFail($id);
+
+        if ($user->profile_photo_path) {
+            unlink('storage/' . $user->profile_photo_path);
+        }
+
         $user->update($validatedData);
 
-        // Redirect or respond with success
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 }

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ReservasiController;
+use App\Http\Controllers\ReservasiKonsultasiController;
 use App\Models\PembelianObat;
 use Illuminate\Support\Facades\Route;
 
@@ -55,8 +55,39 @@ Route::put('/obat/update/{id}', [ObatController::class, 'update'])->name('obat.u
 Route::delete('/obat/delete/{id}', [ObatController::class, 'delete'])->name('obat.delete'); // untuk admin
 
 
+
 //ROUTE RESERVASI
-Route::get('/reservasi', [ReservasiController::class, 'show'])->name('reservasi');
+
+//Session
+Route::post('/consultation/store', [ReservasiKonsultasiController::class, 'storeConsultation'])->name('consultation.store');
+
+// Tampilkan semua reservasi
+Route::get('/reservasi', [ReservasiKonsultasiController::class, 'index'])->name('reservasi.index');
+
+// Form tambah reservasi
+Route::get('/reservasi/create', [ReservasiKonsultasiController::class, 'create'])->name('reservasi.create');
+
+// Simpan data reservasi
+Route::post('/reservasi', [ReservasiKonsultasiController::class, 'store'])->name('reservasi.store');
+Route::post('/reservasi/store', [ReservasiKonsultasiController::class, 'store'])->name('reservasi.store');
+Route::post('/reservasi/store', [ReservasiKonsultasiController::class, 'store'])->middleware('auth')->name('reservasi.store');
+
+
+// Tampilkan detail reservasi
+Route::get('/reservasi/{id}', [ReservasiKonsultasiController::class, 'show'])->name('reservasi.show');
+Route::get('/historyreservasi', [ReservasiKonsultasiController::class, 'history'])->name('reservasi.history');
+
+// Form edit reservasi
+Route::get('/reservasi/{id}/edit', [ReservasiKonsultasiController::class, 'edit'])->name('reservasi.edit');
+
+// Update data reservasi
+Route::put('/reservasi/{id}', [ReservasiKonsultasiController::class, 'update'])->name('reservasi.update');
+
+// Hapus reservasi
+Route::delete('/reservasi/{id}', [ReservasiKonsultasiController::class, 'destroy'])->name('reservasi.destroy');
+
+
+
 
 // Route::get('/reservation', function () {
 //     return view('reservation');
@@ -117,7 +148,7 @@ Route::put('/obat/update/{id}', [ObatController::class, 'update']
 // [ObatController::class, 'store'] 
 )->name('obat.update');
 
-Route::delete('/cart/delete/{id}', [PembelianObatController::class, 'deleteItem'])->name('cart.delete');
+// Route::delete('/cart/delete/{id}', [PembelianObatController::class, 'deleteItem'])->name('cart.delete');
 
 /////
 Route::get('/transaksiCheckout',function(){

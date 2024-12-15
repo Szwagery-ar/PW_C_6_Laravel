@@ -100,7 +100,7 @@
 
     <div class="me-5 mt-3">
         <h4 class="d-flex justify-content-end fw-bold">Book a consultation?
-            <a href="{{ route('reservasi') }}" class="btn btn-primary text-light fw-bold ms-2 mb-3">BOOK NOW</a>
+            <a href="{{ route('reservasi.index') }}" class="btn btn-primary text-light fw-bold ms-2 mb-3">BOOK NOW</a>
         </h4>
     </div>
 
@@ -110,19 +110,6 @@
     </div>
 
     <div class="owl-carousel owl-theme mt-4">
-        @php
-            $categories = [
-                ['image' => 'image1.png', 'title' => 'Sport Nutrition'],
-                ['image' => 'image2.png', 'title' => 'Elderly Care'],
-                ['image' => 'image3.png', 'title' => 'Supplement'],
-                ['image' => 'image4.png', 'title' => 'Healthcare Devices'],
-                ['image' => 'image5.png', 'title' => 'Health food and drinks'],
-                ['image' => 'image6.png', 'title' => 'Diabetic Care'],
-                ['image' => 'image7.png', 'title' => 'Personal Care'],
-                ['image' => 'image8.png', 'title' => 'Menstrual Hygiene'],
-            ];
-
-        @endphp
 
         @foreach ($data as $obat)
             <a href="{{ route('jenisObat') }}" class="flex flex-col items-center">
