@@ -26,6 +26,7 @@ Route::get('/', function () {
 
 //ROUTE LOGIN 
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
+
 Route::post('/login', [UserController::class, 'login'])->name('login');
 
 //ROUTE REGISTER
@@ -66,11 +67,12 @@ Route::get('/obat', function () {
     return view('obat');
 })->name('obat');
 
-Route::get('/jenisObat', [ObatController::class, 'showKatalog'])->name('jenisObat');
+Route::get('/listObat', [ObatController::class, 'showKatalog'])->name('listObat');
+Route::get('/jenisObat/{jenis}', [ObatController::class, 'getAllObatByJenis'])->name('jenisObat');
 
-Route::get('/detailObat', function () {
-    return view('detailObat');
-})->name('detailObat');
+// Route::get('/detailObat', function () {
+//     return view('detailObat');
+// })->name('detailObat');
 
 Route::get('/cart', function(){
     return view('cart');

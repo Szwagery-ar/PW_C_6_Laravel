@@ -44,8 +44,10 @@ class ObatController extends Controller
     {
         try{
             $data = Obat::all();
+            $jenisObat = Obat::all()->unique('jenis_obat');
             return view('home', [
                 "data" => $data,
+                "jenisObat" => $jenisObat
             ]);
         }catch(Exception $e){
             return response()->json([
@@ -71,7 +73,13 @@ class ObatController extends Controller
             ],400);
         }
     }
-
+    public function getAllObatByJenis(String $jenis)
+    {
+        $jenisObat = Obat::where('jenis_obat', $jenis)->get();
+        return view('jenisObat', [
+            "data" => $jenisObat,
+        ]);
+    }
     public function show($id)
     {
         try{

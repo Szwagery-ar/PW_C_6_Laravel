@@ -117,5 +117,5 @@ class UserController extends Controller
 
         // Redirect or respond with success
         return redirect()->back()->with('success', 'Profile updated successfully!');
-
+    } 
 }

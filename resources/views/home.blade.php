@@ -85,7 +85,7 @@
                     <h1 class="text-white mt-3 fw-bold">Your Prescription for Affordable Health Solutions!</h1>
                     <p class="fs-5">Elevate your health journey with exclusive discounts and unparalleled convenience.
                         Your path to well-being starts here, where every purchase is a prescription for savings.</p>
-                    <a href="{{ url('obat') }}" class="btn btn-light text-success">Start Shopping
+                    <a href="{{ url('listObat') }}" class="btn btn-light text-success">Start Shopping
                         <img src="{{ asset('images/beli.png') }}" alt="Atma" width="21" height="21">
                     </a>
                 </div>
@@ -110,28 +110,14 @@
     </div>
 
     <div class="owl-carousel owl-theme mt-4">
-        @php
-            $categories = [
-                ['image' => 'image1.png', 'title' => 'Sport Nutrition'],
-                ['image' => 'image2.png', 'title' => 'Elderly Care'],
-                ['image' => 'image3.png', 'title' => 'Supplement'],
-                ['image' => 'image4.png', 'title' => 'Healthcare Devices'],
-                ['image' => 'image5.png', 'title' => 'Health food and drinks'],
-                ['image' => 'image6.png', 'title' => 'Diabetic Care'],
-                ['image' => 'image7.png', 'title' => 'Personal Care'],
-                ['image' => 'image8.png', 'title' => 'Menstrual Hygiene'],
-            ];
 
-        @endphp
-
-        @foreach ($data as $obat)
-            <a href="{{ route('jenisObat') }}" class="flex flex-col items-center">
-
+        @foreach ($jenisObat as $obat)
+            <a href="{{ route('jenisObat', ['jenis' => $obat->jenis_obat]) }}" class="flex flex-col items-center">
                 <div class="card flex flex-col justify-between items-center p-3 bg-white shadow-lg rounded-lg">
-                    <img src="{{ asset('images/' . $obat->image) }}" alt="{{ $obat->nama_obat }}"
+                    <img src="{{ asset('images/' . $obat->image) }}" alt="{{ $obat->jenis_obat }}"
                         class="h-48 w-full object-cover rounded-t-lg">
                     <div class="mt-2">
-                        <h5 class="text-center text-lg font-semibold text-gray-800">{{ $obat->nama_obat }}</h5>
+                        <h5 class="text-center text-lg font-semibold text-gray-800">{{ $obat->jenis_obat }}</h5>
                     </div>
                 </div>
 
