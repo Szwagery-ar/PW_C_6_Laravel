@@ -6,16 +6,21 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
+
 
 class UserController extends Controller
 {
-    public function showLoginForm()
+
+  public function showLoginForm()
     {
         return view('login');
     }
-
+      
     public function login(Request $request)
     {
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -48,7 +53,6 @@ class UserController extends Controller
 
         return back()->with('error', 'Email atau password yang Anda masukkan salah!');
     }
-
     public function showRegistrationForm()
     {
         return view('register');
@@ -124,5 +128,5 @@ class UserController extends Controller
         $user->update($validatedData);
 
         return redirect()->back()->with('success', 'Profile updated successfully!');
-    }
+
 }
