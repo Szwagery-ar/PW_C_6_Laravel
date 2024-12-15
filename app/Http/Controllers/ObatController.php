@@ -8,30 +8,6 @@ use Illuminate\Http\Request;
 
 class ObatController extends Controller
 {
-    //
-    // public function index() {
-    //     $obat = Obat::all();
-    //     // dd($obat);
-
-    //     return view('obat', ['products' => $obat]);
-    // }
-
-    public function index()
-    {
-        try {
-            $data = Obat::all();
-            return view('home', [
-                "data" => $data,
-            ]);
-        } catch (Exception $e) {
-            return response()->json([
-                "status" => false,
-                "message" => "Something went wrong",
-                "data" => $e->getMessage(),
-            ], 400);
-        }
-    }
-
     public function store(Request $request)
     {
         try {
@@ -43,6 +19,7 @@ class ObatController extends Controller
                 'deskripsi' => 'required|string|max:255',
                 // 'image' => 'required|string', 
             ]);
+
             $user = Obat::create([
                 'nama_obat' => $request->nama_obat,
                 'stok' => $request->stok,
@@ -50,6 +27,7 @@ class ObatController extends Controller
                 'jenis_obat' => $request->jenis_obat,
                 'deskripsi' => $request->deskripsi,
             ]);
+
             return response()->json([
                 'user' => $user,
                 'message' => 'Obat registered successfully'
@@ -59,6 +37,24 @@ class ObatController extends Controller
                 'user' => null,
                 'message' => 'error occured'
             ], 500);
+        }
+    }
+
+    public function index()
+    {
+        try {
+            $data = Obat::all();
+            $jenisObat = Obat::all()->unique('jenis_obat');
+            return view('home', [
+                "data" => $data,
+                "jenisObat" => $jenisObat
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                "status" => false,
+                "message" => "Something went wrong",
+                "data" => $e->getMessage(),
+            ], 400);
         }
     }
 
@@ -77,7 +73,13 @@ class ObatController extends Controller
             ], 400);
         }
     }
-
+    public function getAllObatByJenis(String $jenis)
+    {
+        $jenisObat = Obat::where('jenis_obat', $jenis)->get();
+        return view('jenisObat', [
+            "data" => $jenisObat,
+        ]);
+    }
     public function show($id)
     {
         try {
@@ -105,6 +107,7 @@ class ObatController extends Controller
                 'jenis_obat' => 'required|string|max:255',
                 'deskripsi' => 'required|string|max:255',
             ]);
+
             $data->update($validData);
             return response()->json([
                 "status" => true,
@@ -119,6 +122,7 @@ class ObatController extends Controller
             ], 400);
         }
     }
+
 
     public function destroy($id)
     {
@@ -138,12 +142,12 @@ class ObatController extends Controller
             ], 400);
         }
     }
-
     public function search($nama)
     {
         try {
             // Menggunakan where untuk mencari berdasarkan nama
             $data = Obat::where('nama_obat', 'like', '%' . $nama . '%')->get();
+
             if ($data->isEmpty()) {
                 return response()->json([
                     "status" => false,
@@ -151,6 +155,7 @@ class ObatController extends Controller
                     "data" => [],
                 ], 404);
             }
+
             return response()->json([
                 "status" => true,
                 "message" => "Get Successful",
@@ -163,11 +168,5 @@ class ObatController extends Controller
                 "data" => $e->getMessage(),
             ], 400);
         }
-    }
-
-    public function detail($id) {
-        $obat = Obat::find($id);
-        dd($obat);
-        return view('detailObat', ['product' => $obat]);
     }
 }

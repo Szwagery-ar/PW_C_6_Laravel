@@ -18,7 +18,6 @@ class TransaksiController extends Controller
         $data = $request->all();
         $cart = session()->get('cart', []);
         $userId = Auth::user()->id;
-        // dd("enter controller");
 
         $validate = Validator::make($data, [
             'bayarwoi' => 'required',
@@ -43,7 +42,7 @@ class TransaksiController extends Controller
 
             foreach ($cart as $obat) {
                 if ($obat['selected']) {
-                    $harga_obat = Obat::where('id_obat', $obat['id_obat'])->value('harga_obat');
+                    $harga_obat = Obat::where('id', $obat['id'])->value('harga_obat');
                     $total_harga += $harga_obat * $obat['jumlah_obat'];
                 }
             }
@@ -55,10 +54,10 @@ class TransaksiController extends Controller
             $index = 0;
             foreach ($cart as $obat) {
                 if ($obat['selected']) {
-                    $harga_obat = Obat::where('id_obat', $obat['id_obat'])->value('harga_obat');
+                    $harga_obat = Obat::where('id', $obat['id'])->value('harga_obat');
                     $pembelian_data[$index] = [
                         'id_transaksi' => $transaksi->id_transaksi,
-                        'id_obat' => $obat['id_obat'],
+                        'id_obat' => $obat['id'],
                         'harga_obat' => $harga_obat,
                         'jumlah_obat' => $obat['jumlah_obat'],
                     ];
@@ -73,10 +72,10 @@ class TransaksiController extends Controller
             $index = 0;
             foreach ($cart as $obat) {
                 if ($obat['selected']) {
-                    $harga_obat = Obat::where('id_obat', $obat['id_obat'])->value('harga_obat');
+                    $harga_obat = Obat::where('id', $obat['id'])->value('harga_obat');
                     $pembelian_data[$index] = [
                         'id_transaksi' => $transaksi->id_transaksi,
-                        'id_obat' => $obat['id_obat'],
+                        'id_obat' => $obat['id'],
                         'harga_obat' => $harga_obat,
                         'jumlah_obat' => $obat['jumlah_obat'],
                         'nama_obat' => $obat['nama_obat'],
@@ -89,13 +88,15 @@ class TransaksiController extends Controller
             $lastId = transaksi::latest()->first();
             $data_transaksi['id'] = $lastId['id_transaksi'];
 
+            session()->forget('cart');
+
             return view('pembayaranObat')->with([
                 'successToast' => 'Transaction successful!',
                 'data' => $data_transaksi
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('errorToast', 'Transaction failed: ' . $e->getMessage());
+            return view('home')->with('errorToast', 'Transaction failed: ' . $e->getMessage());
         }
     }
 
@@ -166,8 +167,8 @@ class TransaksiController extends Controller
 
         foreach ($cart as $item) {
             if ($item['selected']) {
-                $dataObat[$item['id_obat']] = [
-                    'id_obat' => $item['id_obat'],
+                $dataObat[$item['id']] = [
+                    'id' => $item['id'],
                     'nama_obat' => $item['nama_obat'],
                     'jumlah_obat' => $item['jumlah_obat'],
                     'harga_obat' => $item['harga_obat'],
