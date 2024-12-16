@@ -9,16 +9,19 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
+
 class UserController extends Controller
 {
-    public function showLoginForm()
+
+  public function showLoginForm()
     {
         session()->forget('cart');
         return view('login');
     }
-
+      
     public function login(Request $request)
     {
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -51,7 +54,6 @@ class UserController extends Controller
 
         return back()->with('error', 'Email atau password yang Anda masukkan salah!');
     }
-
     public function showRegistrationForm()
     {
         return view('register');
@@ -91,14 +93,15 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
-    public function showProfilForm()
-    {
+
+   
+    public function showProfilForm() {
         $user = Auth::user();
         return view('profil', compact('user'));
     }
-
+    
     public function update(Request $request, $id)
     {
         // Validasi data
@@ -107,13 +110,24 @@ class UserController extends Controller
             'phone_number' => 'required|string|max:20',
             'email' => 'required|email|unique:users,email,' . $id,
             'address' => 'nullable|string|max:255',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
+        
+        
+        if ($request->hasFile('profile_photo')) {
+            $path = $request->file('profile_photo')->store('profile-photos', 'public');
+            $validatedData['profile_photo_path'] = $path;
+        }
 
         // Update user data
         $user = User::findOrFail($id);
+
+        if ($user->profile_photo_path) {
+            unlink('storage/' . $user->profile_photo_path);
+        }
+
         $user->update($validatedData);
 
-        // Redirect or respond with success
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 }

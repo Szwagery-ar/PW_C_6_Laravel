@@ -100,7 +100,7 @@
 
     <div class="me-5 mt-3">
         <h4 class="d-flex justify-content-end fw-bold">Book a consultation?
-            <a href="{{ route('reservation') }}" class="btn btn-primary text-light fw-bold ms-2 mb-3">BOOK NOW</a>
+            <a href="{{ route('reservasi.index') }}" class="btn btn-primary text-light fw-bold ms-2 mb-3">BOOK NOW</a>
         </h4>
     </div>
 
