@@ -41,9 +41,9 @@
 
         .card {
             border: none;
-            width: 360px;
+            width: 240px;
             border-radius: 30px;
-            height: 420px;
+            height: 300px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -183,7 +183,7 @@
             $('.owl-carousel').owlCarousel({
                 loop: true,
                 margin: 10,
-                nav: true,
+                nav: false,
                 responsive: {
                     0: {
                         items: 1

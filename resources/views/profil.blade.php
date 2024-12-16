@@ -99,7 +99,7 @@
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
                             <input type="text" class="form-control" id="address" name="address" disabled required
-                                value={{ session('user')['profil']['address'] }}>
+                                value="{{ $user->address }}" form="profile-form" />
                         </div>
 
                         <!-- Tombol Edit -->
