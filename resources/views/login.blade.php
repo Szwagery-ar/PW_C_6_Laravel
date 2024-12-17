@@ -183,18 +183,6 @@
 
                         </div>
                     </div>
-                    <div class="mb-3 d-flex justify-content-center">
-                        <div class="form-login input-group">
-                            <span class="input-group-text bg-light">
-                                <i class="bi bi-three-dots"></i>
-                            </span>
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Password" required>
-                            <span class="input-group-text bg-light cursor-pointer" onclick="togglePassword()">
-                                <i class="bi bi-eye" id="passwordToggleIcon"></i>
-                            </span>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="mb-3 d-flex justify-content-center align-items-center">
@@ -245,7 +233,7 @@
     function togglePassword() {
         const input = document.getElementById('password');
         const icon = document.getElementById('passwordToggleIcon');
-        
+
         if (input.type === 'password') {
             input.type = 'text';
             icon.classList.remove('bi-eye');
@@ -273,7 +261,7 @@
     function showError(field, message) {
         const errorElement = document.getElementById(field + 'Error');
         const input = document.getElementById(field);
-        
+
         if (errorElement && input) {
             errorElement.textContent = message;
             errorElement.style.display = 'block';
@@ -341,4 +329,5 @@
         }
     }
 </script>
+
 </html>
