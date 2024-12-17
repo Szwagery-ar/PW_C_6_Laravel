@@ -198,6 +198,7 @@ Route::get('/admin/medicinegroups', function () {
 Route::get('/admin/usermanagement', [AdminController::class, 'userManagement'])->name('admin.users');
 
 Route::get('/admin/detail/{obat}', [AdminController::class, 'detailObat'])->name('admin.detail');
+Route::delete('/admin/deletemedicine/{obat}', [AdminController::class, 'deleteObat'])->name('admin.deletemedicine');
 // Route::get('/admin/detail', function () {
 //     return view('admin.detail');
 // });
@@ -215,7 +216,7 @@ Route::post('/admin/group/{group}/add', [AdminController::class, 'addToGroup'])-
 
 Route::get('/admin/editmedicine/{obat}', [AdminController::class, 'editObat'])->name('admin.editmedicine');
 Route::put('/admin/editmedicine/{obat}', [AdminController::class, 'updateObat'])->name('admin.updateObat');
-Route::delete('/admin/deletemedicine/{obat}', [AdminController::class, 'deleteObat'])->name('admin.removeMedicine');
+Route::delete('/admin/deletemedicine/{obat}', [AdminController::class, 'deleteObat'])->name('admin.deletemedicine');
 // Route::get('/admin/editmedicine', function () {
 //     return view('admin.editmedicine');
 // });

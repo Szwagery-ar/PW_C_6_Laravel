@@ -124,7 +124,8 @@
             <tbody>
                 <tr>
                     <th>
-                        <img src="{{ asset('images/'.$obat->image) }}" alt="{{ $obat->nama_obat }}" class="img-fluid" style="width: 30%">
+                        <img src="{{ asset('images/' . $obat->image) }}" alt="{{ $obat->nama_obat }}" class="img-fluid"
+                            style="width: 30%">
                     </th>
                 </tr>
             </tbody>
