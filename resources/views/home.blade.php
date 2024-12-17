@@ -117,7 +117,7 @@
                     <img src="{{ asset('images/' . $obat->image) }}" alt="{{ $obat->jenis_obat }}"
                         class="h-48 w-full object-cover rounded-t-lg">
                     <div class="mt-2">
-                        <h5 class="text-center text-lg font-semibold text-gray-800">{{ $obat->jenis_obat }}</h5>
+                        <h5 class="text-center text-lg font-semibold text-gray-800 no-underline">{{ $obat->jenis_obat }}</h5>
                     </div>
                 </div>
             </a>
@@ -136,7 +136,7 @@
                         <img class="h-48 w-full object-cover rounded-t-lg" src="{{ asset('images/' . $obat->image) }}"
                             alt="{{ $obat->nama_obat }}">
                         <div class="mt-2 text-center">
-                            <h5 class="text-lg font-semibold text-gray-800">{{ $obat->nama_obat }}</h5>
+                            <h5 class="text-lg font-semibold text-gray-800 no-underline">{{ $obat->nama_obat }}</h5>
                             <h6 class="text-sm text-gray-500">Rp.{{ $obat->harga_obat }}</h6>
                         </div>
                     </div>
