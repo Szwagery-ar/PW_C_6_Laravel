@@ -152,7 +152,7 @@ class TransaksiController extends Controller
         }
 
         session()->put('cart', $cart);
-        return back()->with('successToast', 'Obat berhasil ditambahkan ke keranjang.');
+        return back()->with('successToast', 'Successfully added to the cart.');
     }
 
     public function getCart()
