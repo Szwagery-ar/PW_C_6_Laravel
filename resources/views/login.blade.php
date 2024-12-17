@@ -24,8 +24,8 @@
         .card-section {
             display: flex;
             width: 90%;
-            max-width: 1300px;
-            min-height: 660px;
+            max-width: 1100px;
+            min-height: 220px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 17px;
@@ -141,7 +141,7 @@
             <span class="img-logo d-flex align-items-start"><img src="{{ asset('images/green-logo.png') }}"
                     alt=""></span>
 
-            <h1 class="mb-4 mt-4 text-center" style="color:#768A6E;"><strong>Sign in to Apotek Atma</strong></h1>
+            <h2 class="mb-4 mt-4 text-center" style="color:#768A6E;"><strong>Sign in to Apotek Atma</strong></h2>
 
             <div class="social-icons mb-3 text-center">
                 <a href="#"><i class="bi bi-facebook"></i></a>
@@ -193,7 +193,7 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="btn sign-in-btn rounded-pill" style="width: 17%;">SIGN IN</button>
+                <button type="submit" class="btn sign-in-btn rounded-pill" style="width: 30%;">SIGN IN</button>
             </form>
         </div>
 
